@@ -10,34 +10,9 @@ lines.first.each.with_index do |line,index|
     puts "#{index}: #{line}"
 end
 
-# class Word
-#     attr_reader :lesson, :section
-
-#     def initialize(ary)
-#         @section = ary[1].to_i
-#         @lesson = ary[2]
-#         @simp = ary[3]
-#         @trad = ary[4]
-#     end
-
-#     def char
-#         if @trad.include?("Manual Review")
-#             @simp
-#         else
-#             @trad
-#         end
-#     end
-# end
-
 words = lines[(1..-1)].map do |ary|
     Word.new(ary)
 end
-
-# words.select do |word|
-#     word.lesson == 1
-# end.each do |word|
-#     puts word.char
-# end
 
 def group_by_section(words)
     (1..6).each do |lesson|
@@ -61,10 +36,6 @@ def group_by_section(words)
 end
 
 def group_by_lesson(words)
-    # lessons = words.map do |word|
-    #     word.lesson
-    # end.to_a.uniq
-    # puts lessons
     last_section = 0
     last_lesson = "whatever"
     words.each do |word|
@@ -85,6 +56,35 @@ def group_by_lesson(words)
     end
 end
 
-group_by_lesson(words)
+def group_by_unit(words)
+  last_unit = 0
+  last_lesson = "whatever"
+  words.each do |word|
+      unless word.unit == last_unit
+          puts
+          print "\n ===== UNIT #{word.unit} =====\n"
+          last_unit = word.unit
+      end
+          
+      if word.lesson == last_lesson
+          print "#{word.char} "
+      else
+          puts
+          puts "Duolingo S#{word.unit}: #{word.lesson}"
+          print "#{word.char} "
+      end
+      last_lesson = word.lesson
+  end
+end
+
+# group_by_unit(words)
+
+last_lesson = "whatever"
+words.each do |word|
+  if word.lesson != last_lesson
+    puts "#{word.lesson}"
+  end
+  last_lesson = word.lesson
+end
 
 puts
