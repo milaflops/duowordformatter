@@ -77,14 +77,6 @@ def group_by_unit(words)
   end
 end
 
-# group_by_unit(words)
-
-last_lesson = "whatever"
-words.each do |word|
-  if word.lesson != last_lesson
-    puts "#{word.lesson}"
-  end
-  last_lesson = word.lesson
-end
+group_by_unit(words)
 
 puts

@@ -108,7 +108,7 @@ class Word
   end
 
   def unit
-    UNITS[section]
+    UNITS[lesson]
   end
 
   def single_char?
